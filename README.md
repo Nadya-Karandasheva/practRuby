@@ -3,7 +3,8 @@
 
 Внешний вид страницы:
 
-![image](https://user-images.githubusercontent.com/10297748/230635852-1e6fa842-daba-4990-826e-caa0644b302d.png)
+![image](https://github.com/Nadya-Karandasheva/practRuby/assets/55376506/1eaf9748-9d3c-4db9-ba17-732ca78ec4d5)
+
 
 
 Сайт на Ruby будет работать с Apache, если добавить в httpd.conf параметры:
