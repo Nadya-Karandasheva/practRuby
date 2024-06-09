@@ -1,50 +1,39 @@
 -- Creation of a test base...
 
-CREATE DATABASE test;
+CREATE DATABASE Bank;
 
-CREATE TABLE files (
-  id_file int(11) NOT NULL,
-  id_my int(11) NOT NULL,
-  description text NOT NULL,
-  name_origin text NOT NULL,
-  path text NOT NULL,
-  date_upload text NOT NULL
+CREATE TABLE Individuals (
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  middle_name VARCHAR(50),
+  passport VARCHAR(20) NOT NULL,
+  inn VARCHAR(12) NOT NULL,
+  identity_card VARCHAR(11) NOT NULL,
+  driver_license VARCHAR(20),
+  additional_documents TEXT,
+  notes VARCHAR(255),
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
-INSERT INTO files (id_file, id_my, description, name_origin, path, date_upload) VALUES
-(16, 17, 'Закачка из менеджера', 'test file 1.pdf', 'files/test_file1.pdf', '31-03-2023  20:07:59');
+INSERT INTO Individuals (first_name, last_name, middle_name, passport, inn, identity_card, driver_license, additional_documents, notes) VALUES
+('Мария', 'Гончаренко', 'Иванова', '5030196283', '123456789123', '98765432198', null, 'выпискаИзНалоговой.dox', null ),
+('Вадим', 'Корчагин', 'Алексеевич', '4010827395', '647846598372', '92198876543', 'категория B', null, null ),
+('Сергей', 'Даниленко', 'Валерьевич', '3090485938', '90385618592', '98321976548', null, 'выпискаИзНалоговой.dox', null ),
+('Светлана', 'Чеснокова', 'Юревна', '4010758375', '620649137946', '65432198798', 'категория B', null, 'замужем' ),
+('Илья', 'Монар', 'Михайлович', '4020485837', '72948274093', '43219876598', 'категория А,B', null, 'Нелбходимо обновить данные' );
 
-CREATE TABLE myarttable (
-  id int(11) NOT NULL,
-  text text NOT NULL,
-  description text NOT NULL,
-  keywords text NOT NULL
+CREATE TABLE BorrowedFunds (
+  amount INT NOT NULL,
+  percent_rate INT NOT NULL,
+  term TIMESTAMP NOT NULL,
+  conditions TEXT NOT NULL,
+  notes VARCHAR(255),
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  individual_id FOREIGN KEY REFERENCES Individuals(id),
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
-INSERT INTO myarttable (id, text, description, keywords) VALUES
-(17, 'Baranov', 'Engeneer', 'Ivanov'),
-(20, 'Fedorov', 'Cpp, Delphi, PHP, JS', '3t'),
-(92, 'Daniel', 'Artist', 'Theater Saturday'),
-(93, 'Andrew', 'Poet', 'First Electrotechnical University'),
-(94, 'Nikita', 'Student', 'Technological Institute'),
-(95, 'Ilya', 'Salesman', 'Hypermarket'),
-(96, 'Matvey', 'Programmer', 'Metropolitan College'),
-(97, 'Fedor', 'Loader', 'St. Petersburg State University'),
-(98, 'Ivan', 'Student', 'LETI'),
-(99, 'Alexey', 'Engineer', 'ITMO');
-
-ALTER TABLE files
-  ADD PRIMARY KEY (id_file),
-  ADD KEY id_my (id_my);
-
-ALTER TABLE myarttable
-  ADD PRIMARY KEY (id);
-
-ALTER TABLE files
-  MODIFY id_file int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
-ALTER TABLE myarttable
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-
-ALTER TABLE files
-  ADD CONSTRAINT files_ibfk_1 FOREIGN KEY (id_my) REFERENCES myarttable (id);
+INSERT INTO BorrowedFunds (individual_id, amount, percent_rate, term, conditions, notes) VALUES
+(2, 1000000, 5, '31-03-2025  23:59:59', 'условияВКА.txt', null),
+(3, 100000, 3, '29-07-2025  23:59:59', 'условияСЧЮ.txt', 'два договора'),
+(3, 200000, 3, '17-04-2025  23:59:59', 'условияСЧЮ-2.txt', 'два договора'),
+(4, 5500000, 7, '2-10-2025  23:59:59', 'условияИММ.txt', null);

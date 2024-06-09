@@ -13,22 +13,32 @@ client = Mysql2::Client.new(
 # обработка значений из формы.
 require "cgi"
 cgi = CGI.new
-if cgi['col1'] != '' && cgi['col2'] != '' && cgi['col2'] != ''
-	client.query("INSERT INTO myarttable (text, description, keywords) VALUES (\""+cgi['col1']+"\",\""+cgi['col2']+"\",\""+cgi['col3']+"\")")
+if cgi['col1'] != '' && cgi['col2'] != '' && cgi['col3'] != '' && cgi['col4'] != '' && cgi['col5'] != '' && cgi['col6'] != '' && cgi['col7'] != '' && cgi['col8'] != '' && cgi['col8'] != '' && cgi['col9'] != ''
+	client.query("INSERT INTO Individuals (first_name, last_name, middle_name, passport, inn, identity_card, driver_license, additional_documents, notes) 
+	VALUES (\""+cgi['col1']+"\",\""+cgi['col2']+"\",\""+cgi['col3']+"\",\""+cgi['col4']+"\",\""+cgi['col5']+"\",\""+cgi['col6']+"\",\""+cgi['col7']+"\",\""+cgi['col8']+"\",\""+cgi['col9']+"\")")
 end
 		
 # главная функция для показа строк, работает всегда.
 def viewSelect(client)
-	results = client.query("SHOW COLUMNS FROM myarttable")
+	results = client.query("SHOW COLUMNS FROM Individuals")
 	puts '<tr>'
 	results.each do |row|
 	  puts '<td>'+row['Field'].to_s+'</td>'
 	end
 	puts '</tr>'
 
-	results = client.query("SELECT * FROM myarttable WHERE id>14 ORDER BY id DESC")
+	results = client.query("SELECT * FROM Individuals ORDER BY id DESC")
 	results.each do |row|
-	  puts '<tr><td>'+row['id'].to_s+'</td><td>'+row['text']+'</td><td>'+row['description']+'</td><td>'+row['keywords']+'</td></tr>'
+	  puts '<tr><td>'+row['id'].to_s+'</td>
+	  		<td>'+row['first_name']+'</td>
+			<td>'+row['last_name']+'</td>
+			<td>'+row['middle_name']+'</td>
+			<td>'+row['passport']+'</td>
+			<td>'+row['inn']+'</td>
+			<td>'+row['identity_card']+'</td>
+			<td>'+row['driver_license']+'</td>
+			<td>'+row['additional_documents']+'</td>
+			<td>'+row['notes']+'</td></tr>'
 	end
 end
 
