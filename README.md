@@ -3,7 +3,8 @@
 
 Внешний вид страницы:
 
-![image](https://github.com/Nadya-Karandasheva/practRuby/assets/55376506/1eaf9748-9d3c-4db9-ba17-732ca78ec4d5)
+![image](https://github.com/Nadya-Karandasheva/practRuby/assets/55376506/21cfe1b3-7d92-4e9f-ab21-a27c4082c87b)
+
 
 
 
